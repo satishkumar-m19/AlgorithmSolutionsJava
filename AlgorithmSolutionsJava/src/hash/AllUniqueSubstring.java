@@ -1,4 +1,5 @@
 package hash;
+
 /*
  * Problem
  * Given a string find out the longest substring which has all unique letters,
@@ -16,42 +17,42 @@ package hash;
 import java.util.HashSet;
 
 public class AllUniqueSubstring {
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		String input = "abacbdadbc";
 		printAllUniqueSubstring(input);
 	}
-	public static void printAllUniqueSubstring(String input){
+
+	public static void printAllUniqueSubstring(String input) {
 		HashSet<Character> set = new HashSet<Character>();
 		int startIndex = 0;
 		int endIndex = 0;
 		int maxLength = 0;
 		int startMax = 0;
 		int endMax = 0;
-		while(endIndex < input.length()){
+		while (endIndex < input.length()) {
 			char addChar = input.charAt(endIndex);
-			if(!set.contains(addChar)){
+			if (!set.contains(addChar)) {
 				set.add(addChar);
-				int currentLength = endIndex - startIndex +1;
-				if(currentLength > maxLength){
+				int currentLength = endIndex - startIndex + 1;
+				if (currentLength > maxLength) {
 					maxLength = currentLength;
 					startMax = startIndex;
 					endMax = endIndex;
 				}
 				endIndex++;
-			}
-			else{
+			} else {
 				char removeChar = input.charAt(startIndex);
 				set.remove(removeChar);
 				startIndex++;
-				if(removeChar == addChar){
-					int currentLength = endIndex - startIndex +1;
-					if(currentLength > maxLength){
+				if (removeChar == addChar) {
+					int currentLength = endIndex - startIndex + 1;
+					if (currentLength > maxLength) {
 						maxLength = currentLength;
 						startMax = startIndex;
 						endMax = endIndex;
 					}
 					endIndex++;
-				}	
+				}
 			}
 		}
 		System.out.println(startMax + "," + endMax);

@@ -1,4 +1,5 @@
 package hash;
+
 /*
  * Longest subarray with equal number of ones and zeros
  * Problem
@@ -19,33 +20,35 @@ package hash;
  * */
 
 import java.util.HashMap;
+
 public class MaxSubarrayEqualOnesZeros {
-	public static void main(String[] args){
-		int[] input = {1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0,1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0};
+	public static void main(String[] args) {
+		int[] input = { 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1,
+				0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0 };
 		printMaxSubarray(input);
 		printMaxSubarrayUsingHashmap(input);
 	}
 
 	private static void printMaxSubarrayUsingHashmap(int[] input) {
-		int[] diffMap = new int[input.length * 2 +1];
+		int[] diffMap = new int[input.length * 2 + 1];
 		diffMap[input.length] = -1;
 		int sum = 0;
 		int maxLength = 0;
 		int maxStart = -1;
 		int maxEnd = -1;
-		for (int i = 0; i < input.length; i++){
-			if (input[i]==0)
-				sum-=1;
+		for (int i = 0; i < input.length; i++) {
+			if (input[i] == 0)
+				sum -= 1;
 			else
-				sum+=1;
+				sum += 1;
 			int prevIndex = diffMap[input.length + sum];
 			if (prevIndex == 0)
-				diffMap[input.length + sum]=i;
-			else{
-				if(i - prevIndex>maxLength){
+				diffMap[input.length + sum] = i;
+			else {
+				if (i - prevIndex > maxLength) {
 					maxLength = i - prevIndex;
 					maxStart = prevIndex + 1;
-					maxEnd = i;	
+					maxEnd = i;
 				}
 			}
 		}
@@ -54,42 +57,43 @@ public class MaxSubarrayEqualOnesZeros {
 	}
 
 	private static void printMaxSubarray(int[] input) {
-		HashMap<Integer, MaxMinIndex> diffMap = new HashMap<Integer,MaxMinIndex>();
+		HashMap<Integer, MaxMinIndex> diffMap = new HashMap<Integer, MaxMinIndex>();
 		int sum = 0;
-		for(int i = 0; i < input.length; i++){
+		for (int i = 0; i < input.length; i++) {
 			int num = input[i];
 			if (num == 0)
 				sum -= 1;
 			else
-				sum +=1;
-			if(diffMap.containsKey(sum)){
+				sum += 1;
+			if (diffMap.containsKey(sum)) {
 				MaxMinIndex temp = diffMap.get(sum);
 				temp.maxIndex = i;
 				diffMap.put(sum, temp);
-			}
-			else{
+			} else {
 				MaxMinIndex temp = new MaxMinIndex();
 				temp.minIndex = i;
 				temp.maxIndex = i;
 				diffMap.put(sum, temp);
 			}
 		}
-		int lowIndex = 0,highIndex = 0, maximum = 0;
-		for(MaxMinIndex h : diffMap.values()){
+		int lowIndex = 0, highIndex = 0, maximum = 0;
+		for (MaxMinIndex h : diffMap.values()) {
 			int localMax = h.maxIndex - h.minIndex;
-			if(localMax>maximum){
+			if (localMax > maximum) {
 				maximum = localMax;
 				lowIndex = h.minIndex + 1;
 				highIndex = h.maxIndex;
 			}
 		}
 		System.out.println("indices (" + lowIndex + "," + highIndex + ")");
-		System.out.println("length=" + maximum);;
-		
+		System.out.println("length=" + maximum);
+		;
+
 	}
 
 }
-class MaxMinIndex{
+
+class MaxMinIndex {
 	int maxIndex = 0;
 	int minIndex = 999;
 }

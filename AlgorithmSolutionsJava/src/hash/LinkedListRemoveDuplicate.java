@@ -1,4 +1,5 @@
 package hash;
+
 /*
  * Problem
  * You have an infinite linked list which is not sorted and contains duplicate elements. 
@@ -14,7 +15,7 @@ package hash;
 import java.util.HashSet;
 
 public class LinkedListRemoveDuplicate {
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		Node input = new Node(3);
 		input.next = new Node(5);
 		input.next.next = new Node(4);
@@ -26,24 +27,25 @@ public class LinkedListRemoveDuplicate {
 		input.next.next.next.next.next.next.next.next = new Node(4);
 		Node tempHead = input;
 		System.out.println("Original Linked List");
-		while (tempHead != null){
+		while (tempHead != null) {
 			System.out.print(tempHead.value + "=>");
 			tempHead = tempHead.next;
 		}
 		Node output = removeDuplicate(input);
 		System.out.println();
 		System.out.println("Linked List after removing the duplicates");
-		while (output.next != null){
+		while (output.next != null) {
 			System.out.print(output.value + "=>");
 			output = output.next;
 		}
 	}
-	public static Node removeDuplicate(Node tempHead){
+
+	public static Node removeDuplicate(Node tempHead) {
 		Node output = new Node();
 		Node tempOutput = output;
 		HashSet hashSet = new HashSet();
-		while(tempHead != null){
-			if(!hashSet.contains(tempHead.value)){
+		while (tempHead != null) {
+			if (!hashSet.contains(tempHead.value)) {
 				hashSet.add(tempHead.value);
 				tempOutput.value = tempHead.value;
 				tempOutput.next = new Node();
@@ -52,14 +54,17 @@ public class LinkedListRemoveDuplicate {
 			tempHead = tempHead.next;
 		}
 		return output;
-	}	
+	}
 }
-class Node{
+
+class Node {
 	int value;
 	Node next;
-	public Node(int value){
+
+	public Node(int value) {
 		this.value = value;
 	}
-	public Node(){
+
+	public Node() {
 	}
 }

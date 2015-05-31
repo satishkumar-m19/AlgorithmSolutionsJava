@@ -1,4 +1,5 @@
 package hash;
+
 /*
  * Find if two words are anagram or not
  * Problem
@@ -17,33 +18,33 @@ package hash;
 import java.util.HashMap;
 
 public class CheckTwoWordsAnagram {
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		String a = "listen";
 		String b = "enlist";
-		checkIfAnagram(a,b);
+		checkIfAnagram(a, b);
 	}
-	public static void checkIfAnagram(String a, String b){
-		HashMap<Character,Integer> charMap = new HashMap<Character,Integer>();
-		for(char ch: a.toCharArray()){
-			if(charMap.containsKey(ch))
+
+	public static void checkIfAnagram(String a, String b) {
+		HashMap<Character, Integer> charMap = new HashMap<Character, Integer>();
+		for (char ch : a.toCharArray()) {
+			if (charMap.containsKey(ch))
 				charMap.put(ch, (charMap.get(ch) + 1));
 			else
 				charMap.put(ch, 1);
 		}
-		for(int i = 0; i < b.length(); i++){
+		for (int i = 0; i < b.length(); i++) {
 			char ch = b.charAt(i);
-			if(charMap.containsKey(ch)){
-				if(charMap.get(ch) == 1)
+			if (charMap.containsKey(ch)) {
+				if (charMap.get(ch) == 1)
 					charMap.remove(ch);
 				else
 					charMap.put(ch, (charMap.get(ch) - 1));
-			}
-			else{
+			} else {
 				System.out.println("The given string is not a Anagram");
 				return;
 			}
 		}
-		if(charMap.isEmpty()){
+		if (charMap.isEmpty()) {
 			System.out.println("The given string is a Anagram");
 		}
 	}
